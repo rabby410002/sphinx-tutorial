@@ -1,0 +1,258 @@
+.. lion documentation master file, created by
+   sphinx-quickstart on Thu Nov 23 10:21:06 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+lion's documentation
+###################################
+
+
+
+.. _lion_doc:
+
+Indices and tables
+==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
+* :ref:`dataschema_label`
+	* :ref:`spyderman_label`
+	* :ref:`trip_label`
+	* :ref:`pixnet_label`
+* :ref:`filepath_label`
+	* :ref:`tripcrawl`
+	* :ref:`pixnetcrawl`
+	* :ref:`spider`
+* :ref:`spiderframe`
+* :ref:`readme`
+	* :ref:`redis`
+	* :ref:`run`
+
+.. _dataschema_label:
+
+Data Schema
+===================
+
+
+
+.. _spyderman_label:
+
+Spyderman 
+----------------
+
+
+
+
+``十個同業團體旅遊產品蒐集``
+
+::
+
+	1.可樂旅遊 coltour
+	2.東南旅遊 settour
+	3.山富travel4u
+	4.品冠 pktravel
+	5.大興 tahsintour
+	6.五福 lifetour
+	7.長汎 everfuntravel
+	8.鳳凰 phoenix
+	9.巨匠 artisan 
+	10.旅遊家travelerts
+
+
+.. image:: spiderman_schema.jpg
+
+
+* DateOption/航班資訊: 
+	* tour_code:行程編號
+	* departure_date:航班日期
+	* available:可售數量
+	* price:航班價格
+	* trip_id: 行程id
+* Trip:
+	* title:行程標題
+	* inumber:行程編號
+	* agent:旅行社
+	* description:行程描述
+* Flight/航班: 
+	* departure_datetime:出發時間
+	* departure_airport: 出發機場
+	* departure_flight_no:出發航班編號
+	* arrival_datetime:抵達時間
+	* arrival_airport: 抵達機場 
+	* arrival_flight_no:抵達航班編號
+	* airline:航空公司
+* Itinerary :
+	* number:每日行程
+	* title:行程標題
+	* subtitle:行程次標題
+	* transportation:乘車時間
+	* meal:餐食
+	* hotel_name:飯店名稱
+
+
+
+
+.. _trip_label:
+
+Tripadvisor schema
+-----------------------
+
+.. image:: trip_schema.jpg
+
+* Attraction:
+	* url: 網址
+	* Chinese_title:中文標題
+	* English_title:英文標題
+	* Tag:標籤,Address:地址
+	* Phone:電話
+	* Lat:經度
+	* Lng:緯度
+	* places:地點
+* Log
+	* url:網址
+	* time: 抓取時間
+
+.. _pixnet_label:
+
+Pixnet schema
+--------------------------------
+
+.. image:: pixnet_schema.jpg
+
+* Posts/文章內容 :
+	* url: 文章網址
+	* title: 文章標題
+	* content: 文章內容
+* Pending_keywords: 
+	* Keyword:景點名稱
+
+.. _filepath_label:
+
+檔案路徑與執行方式
+==================
+
+.. _tripcrawl:
+
+tripadvisor爬蟲
+------------------------------------------------
+* 路徑:release_20171019/crawl_ta 
+* 執行sh run.sh
+* 產生 ta_updated_ver.db檔案
+* 有進度條可以看執行的進度
+
+
+.. _pixnetcrawl:
+
+pixnet痞客邦爬蟲
+---------------------------------------
+* 路徑:release_20171019/pixnet
+* 建立DB,並修改pyconfig.py中的SQL_URL和TA_SQLITE
+* SQL_URL需符合sqlalchemy格式
+	* sqlalchemy格式   -  dialect+driver://username:password@host:port/database 
+* TA_SQLITE路徑需正確指向ta_updated_ver.db(ta_updated_ver.db是由tripadvisor產生爬蟲產生的db檔案)
+* 執行 python3 run.py
+
+.. _spider:
+
+同業旅遊網站爬蟲
+-------------------------------------------
+* 路徑: release_20171019/spiderman
+* 安裝redis並確認有在運行
+* 建立DB,並修改pyconfig.py中的SQL_URL,需符合sqlalchemy格式
+* 執行python3 run.py
+
+
+.. _spiderframe:
+
+爬蟲架構說明
+===============
+
+pyspider
+-----------
+* 預設是running,可以免開GUI跑
+* 利用project.db 管理sync problem
+* 如果要重跑 需要清空task.db scheduler.*
+* Result.db會是空的,因為會接到result worker
+* Result_worker 會將資料存到db
+
+Pyspider基本架構
+------------------
+.. image
+
+sql資料
+------------------
+* 資料欄位定義在model.py
+* 用sqlalchemy格式
+
+利用redis處理message_queue
+-------------------------------
+
+
+如果有需要看pyspider, 或是port衝突, 看config.json
+------------------------------------------------------------
+
+.. code-block:: json
+	:emphasize-lines: 3,9
+	
+	{
+	    "webui": {
+	        "port":10000
+	    },
+	    "result_worker": {
+	        "result_cls": "my_result_worker.MyResultWorker"
+	    },
+	    "scheduler":{
+	        "xmlrpc-port": 12344
+	    }
+	}
+	
+	
+.. _readme:
+
+其它疑難排解
+======================
+
+.. _redis:
+
+安裝redis
+-----------------------
+* 從redis網站下載安裝包 wget http://download.redis.io/releases/redis-3.2.5.tar.gz
+* 解壓縮 tar -zxvf /netmeeting/redis-3.2.5.tar.gz
+* 安裝 make install
+* 啟動服務 redis-server
+* 啟動客戶端 redis-client
+
+.. _run:
+
+重跑的流程
+-----------------------
+* 如果爬蟲執行過程中被意外關掉,殘留的結果會導致重跑時出現error
+* 把目錄下有個data的資料夾砍掉
+* 清空redis
+	* redis-cli進到redis中
+	* 輸入 "KEYS \*" 看裡面還有哪些資料殘留
+ 	* DEL xxx 把東西都砍掉
+* python3 model.py 清空資料庫
+* python3 run.py 開始執行pyspider
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+

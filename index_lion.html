@@ -1,0 +1,414 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>lion’s documentation &#8212; lion 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lion’s documentation" href="index_lion2.html" />
+    <link rel="prev" title="sphinx tutorial documentation" href="sphinx_tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index_lion2.html" title="lion’s documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sphinx_tutorial.html" title="sphinx tutorial documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lion 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lion-s-documentation">
+<h1>lion’s documentation<a class="headerlink" href="#lion-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="indices-and-tables">
+<span id="lion-doc"></span><h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#dataschema-label"><span class="std std-ref">Data Schema</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#spyderman-label"><span class="std std-ref">Spyderman</span></a></li>
+<li><a class="reference internal" href="#trip-label"><span class="std std-ref">Tripadvisor schema</span></a></li>
+<li><a class="reference internal" href="#pixnet-label"><span class="std std-ref">Pixnet schema</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#filepath-label"><span class="std std-ref">檔案路徑與執行方式</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#tripcrawl"><span class="std std-ref">tripadvisor爬蟲</span></a></li>
+<li><a class="reference internal" href="#pixnetcrawl"><span class="std std-ref">pixnet痞客邦爬蟲</span></a></li>
+<li><a class="reference internal" href="#spider"><span class="std std-ref">同業旅遊網站爬蟲</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><a class="reference internal" href="#spiderframe"><span class="std std-ref">爬蟲架構說明</span></a></li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#readme"><span class="std std-ref">其它疑難排解</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#redis"><span class="std std-ref">安裝redis</span></a></li>
+<li><a class="reference internal" href="#run"><span class="std std-ref">重跑的流程</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="data-schema">
+<span id="dataschema-label"></span><h2>Data Schema<a class="headerlink" href="#data-schema" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spyderman">
+<span id="spyderman-label"></span><h3>Spyderman<a class="headerlink" href="#spyderman" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">十個同業團體旅遊產品蒐集</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span><span class="n">可樂旅遊</span> <span class="n">coltour</span>
+<span class="mf">2.</span><span class="n">東南旅遊</span> <span class="n">settour</span>
+<span class="mf">3.</span><span class="n">山富travel4u</span>
+<span class="mf">4.</span><span class="n">品冠</span> <span class="n">pktravel</span>
+<span class="mf">5.</span><span class="n">大興</span> <span class="n">tahsintour</span>
+<span class="mf">6.</span><span class="n">五福</span> <span class="n">lifetour</span>
+<span class="mf">7.</span><span class="n">長汎</span> <span class="n">everfuntravel</span>
+<span class="mf">8.</span><span class="n">鳳凰</span> <span class="n">phoenix</span>
+<span class="mf">9.</span><span class="n">巨匠</span> <span class="n">artisan</span>
+<span class="mf">10.</span><span class="n">旅遊家travelerts</span>
+</pre></div>
+</div>
+<img alt="_images/spiderman_schema.jpg" src="_images/spiderman_schema.jpg" />
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>DateOption/航班資訊:</dt>
+<dd><ul class="first last">
+<li>tour_code:行程編號</li>
+<li>departure_date:航班日期</li>
+<li>available:可售數量</li>
+<li>price:航班價格</li>
+<li>trip_id: 行程id</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Trip:</dt>
+<dd><ul class="first last">
+<li>title:行程標題</li>
+<li>inumber:行程編號</li>
+<li>agent:旅行社</li>
+<li>description:行程描述</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Flight/航班:</dt>
+<dd><ul class="first last">
+<li>departure_datetime:出發時間</li>
+<li>departure_airport: 出發機場</li>
+<li>departure_flight_no:出發航班編號</li>
+<li>arrival_datetime:抵達時間</li>
+<li>arrival_airport: 抵達機場</li>
+<li>arrival_flight_no:抵達航班編號</li>
+<li>airline:航空公司</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Itinerary :</dt>
+<dd><ul class="first last">
+<li>number:每日行程</li>
+<li>title:行程標題</li>
+<li>subtitle:行程次標題</li>
+<li>transportation:乘車時間</li>
+<li>meal:餐食</li>
+<li>hotel_name:飯店名稱</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="tripadvisor-schema">
+<span id="trip-label"></span><h3>Tripadvisor schema<a class="headerlink" href="#tripadvisor-schema" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/trip_schema.jpg" src="_images/trip_schema.jpg" />
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Attraction:</dt>
+<dd><ul class="first last">
+<li>url: 網址</li>
+<li>Chinese_title:中文標題</li>
+<li>English_title:英文標題</li>
+<li>Tag:標籤,Address:地址</li>
+<li>Phone:電話</li>
+<li>Lat:經度</li>
+<li>Lng:緯度</li>
+<li>places:地點</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Log</dt>
+<dd><ul class="first last">
+<li>url:網址</li>
+<li>time: 抓取時間</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="pixnet-schema">
+<span id="pixnet-label"></span><h3>Pixnet schema<a class="headerlink" href="#pixnet-schema" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/pixnet_schema.jpg" src="_images/pixnet_schema.jpg" />
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Posts/文章內容 :</dt>
+<dd><ul class="first last">
+<li>url: 文章網址</li>
+<li>title: 文章標題</li>
+<li>content: 文章內容</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Pending_keywords:</dt>
+<dd><ul class="first last">
+<li>Keyword:景點名稱</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="filepath-label">
+<span id="id1"></span><h2>檔案路徑與執行方式<a class="headerlink" href="#filepath-label" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tripadvisor">
+<span id="tripcrawl"></span><h3>tripadvisor爬蟲<a class="headerlink" href="#tripadvisor" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>路徑:release_20171019/crawl_ta</li>
+<li>執行sh run.sh</li>
+<li>產生 ta_updated_ver.db檔案</li>
+<li>有進度條可以看執行的進度</li>
+</ul>
+</div>
+<div class="section" id="pixnet">
+<span id="pixnetcrawl"></span><h3>pixnet痞客邦爬蟲<a class="headerlink" href="#pixnet" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>路徑:release_20171019/pixnet</li>
+<li>建立DB,並修改pyconfig.py中的SQL_URL和TA_SQLITE</li>
+<li><dl class="first docutils">
+<dt>SQL_URL需符合sqlalchemy格式</dt>
+<dd><ul class="first last">
+<li>sqlalchemy格式   -  dialect+driver://username:password&#64;host:port/database</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>TA_SQLITE路徑需正確指向ta_updated_ver.db(ta_updated_ver.db是由tripadvisor產生爬蟲產生的db檔案)</li>
+<li>執行 python3 run.py</li>
+</ul>
+</div>
+<div class="section" id="spider">
+<span id="id2"></span><h3>同業旅遊網站爬蟲<a class="headerlink" href="#spider" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>路徑: release_20171019/spiderman</li>
+<li>安裝redis並確認有在運行</li>
+<li>建立DB,並修改pyconfig.py中的SQL_URL,需符合sqlalchemy格式</li>
+<li>執行python3 run.py</li>
+</ul>
+</div>
+</div>
+<div class="section" id="spiderframe">
+<span id="id3"></span><h2>爬蟲架構說明<a class="headerlink" href="#spiderframe" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pyspider">
+<h3>pyspider<a class="headerlink" href="#pyspider" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>預設是running,可以免開GUI跑</li>
+<li>利用project.db 管理sync problem</li>
+<li>如果要重跑 需要清空task.db scheduler.*</li>
+<li>Result.db會是空的,因為會接到result worker</li>
+<li>Result_worker 會將資料存到db</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Pyspider基本架構<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="sql">
+<h3>sql資料<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>資料欄位定義在model.py</li>
+<li>用sqlalchemy格式</li>
+</ul>
+</div>
+<div class="section" id="redismessage-queue">
+<h3>利用redis處理message_queue<a class="headerlink" href="#redismessage-queue" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="pyspider-port-config-json">
+<h3>如果有需要看pyspider, 或是port衝突, 看config.json<a class="headerlink" href="#pyspider-port-config-json" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;webui&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="hll">        <span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="mi">10000</span>
+</span>    <span class="p">},</span>
+    <span class="nt">&quot;result_worker&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;result_cls&quot;</span><span class="p">:</span> <span class="s2">&quot;my_result_worker.MyResultWorker&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;scheduler&quot;</span><span class="p">:{</span>
+<span class="hll">        <span class="nt">&quot;xmlrpc-port&quot;</span><span class="p">:</span> <span class="mi">12344</span>
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="readme">
+<span id="id5"></span><h2>其它疑難排解<a class="headerlink" href="#readme" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="redis">
+<span id="id6"></span><h3>安裝redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>從redis網站下載安裝包 wget <a class="reference external" href="http://download.redis.io/releases/redis-3.2.5.tar.gz">http://download.redis.io/releases/redis-3.2.5.tar.gz</a></li>
+<li>解壓縮 tar -zxvf /netmeeting/redis-3.2.5.tar.gz</li>
+<li>安裝 make install</li>
+<li>啟動服務 redis-server</li>
+<li>啟動客戶端 redis-client</li>
+</ul>
+</div>
+<div class="section" id="run">
+<span id="id7"></span><h3>重跑的流程<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>如果爬蟲執行過程中被意外關掉,殘留的結果會導致重跑時出現error</li>
+<li>把目錄下有個data的資料夾砍掉</li>
+<li><dl class="first docutils">
+<dt>清空redis</dt>
+<dd><ul class="first last">
+<li>redis-cli進到redis中</li>
+<li>輸入 “KEYS *” 看裡面還有哪些資料殘留</li>
+<li>DEL xxx 把東西都砍掉</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>python3 model.py 清空資料庫</li>
+<li>python3 run.py 開始執行pyspider</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sphinx_tutorial.html"
+                        title="previous chapter">sphinx tutorial documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="index_lion2.html"
+                        title="next chapter">lion’s documentation</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index_lion.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lion’s documentation</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#data-schema">Data Schema</a><ul>
+<li><a class="reference internal" href="#spyderman">Spyderman</a></li>
+<li><a class="reference internal" href="#tripadvisor-schema">Tripadvisor schema</a></li>
+<li><a class="reference internal" href="#pixnet-schema">Pixnet schema</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filepath-label">檔案路徑與執行方式</a><ul>
+<li><a class="reference internal" href="#tripadvisor">tripadvisor爬蟲</a></li>
+<li><a class="reference internal" href="#pixnet">pixnet痞客邦爬蟲</a></li>
+<li><a class="reference internal" href="#spider">同業旅遊網站爬蟲</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spiderframe">爬蟲架構說明</a><ul>
+<li><a class="reference internal" href="#pyspider">pyspider</a></li>
+<li><a class="reference internal" href="#id4">Pyspider基本架構</a></li>
+<li><a class="reference internal" href="#sql">sql資料</a></li>
+<li><a class="reference internal" href="#redismessage-queue">利用redis處理message_queue</a></li>
+<li><a class="reference internal" href="#pyspider-port-config-json">如果有需要看pyspider, 或是port衝突, 看config.json</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#readme">其它疑難排解</a><ul>
+<li><a class="reference internal" href="#redis">安裝redis</a></li>
+<li><a class="reference internal" href="#run">重跑的流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index_lion2.html" title="lion’s documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sphinx_tutorial.html" title="sphinx tutorial documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lion 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, peihsuan.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>

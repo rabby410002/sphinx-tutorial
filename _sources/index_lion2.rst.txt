@@ -1,0 +1,938 @@
+.. lion documentation master file, created by
+   sphinx-quickstart on Thu Nov 23 10:21:06 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+lion's documentation
+####################################
+
+
+  
+   
+.. _lion_doc2:   
+   
+Index and tables
+==================
+
+* :ref:`gentable`
+* :ref:`table_schema`
+
+
+
+.. _gentable:
+
+gentable.py 自動產生table schema格式
+=================================================
+.. code-block:: python
+	:linenos:
+	:emphasize-lines: 1,2
+	:name: gentable.py
+        
+	# 在DB主機192.168.10.10執行
+	#!/usr/bin/python3
+	# -*- coding: utf-8 -*-
+	import codecs
+	import sys
+	import mysql.connector
+	import traceback
+	import random
+	
+	cnx2 = mysql.connector.connect(user='nctu', password='!W100shared',host='localhost',port=3306,database='lion_internal') 
+	
+	
+	
+	print('.. csv-table:: Table Schema\n \
+	   :header: "欄位名稱", "資料型態", "KEY", "欄位說明"\n \
+	   :widths: 15, 10, 5,20\n \
+	')
+	
+	cursor = cnx2.cursor()
+	sql = "SHOW FULL COLUMNS FROM clickstream"
+	try:
+	    cursor.execute(sql)
+	    for u in cursor:
+	        print('\t"{0}","{1}","{2}","{3}"'.format(u[0],u[1],u[4],u[8]))
+	except: 
+	    print('exception')
+	    traceback.print_exc()
+        
+
+
+.. _table_schema:
+
+lion_internal table schema             
+============================
+
+.. csv-table:: DW_PROD_ITINERARY_CTO
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "IS_VALID","char(1)","",""
+        "ITINERARY_ID","varchar(20)","",""
+        "ITINERARY_NUM","smallint(6)","",""
+        "ITINERARY_CTO","varchar(20)","",""
+        "ITINERARY_SEQ","smallint(6)","",""
+        "ITINERARY_CTONAME","varchar(150)","",""
+        "ITINERARY_CTOWEB","varchar(150)","",""
+        "ITINERARY_CTOKEY","varchar(20)","",""
+        
+        
+        
+.. csv-table:: DW_PROD_ITINERARY_DESC
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "IS_VALID","char(1)","",""
+        "ITINERARY_ID","varchar(20)","",""
+        "ITINERARY_TYPE","char(1)","",""
+        "ITINERARY_NUM","smallint(6)","",""
+        "ITINERARY_DESC","text","",""
+        
+        
+.. csv-table:: KWS
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "kw","varchar(100)","UNI",""
+        
+        
+.. csv-table:: PDM_ITINERARY_CTO
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(45)","",""
+        "ITINERARY_ID","varchar(45)","MUL",""
+        "ITINERARY_NUM","int(11)","",""
+        "ITINERARY_CTO","varchar(45)","",""
+        "ITINERARY_SEQ","int(11)","",""
+        "ITINERARY_CTONAME","varchar(200)","",""
+        "ITINERARY_CTOWEB","varchar(200)","",""
+        "ITINERARY_CTOKEY","varchar(200)","",""
+        
+        
+.. csv-table:: RAW_PROD_ITINERARY_DETAIL
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","char(8)","",""
+        "ITINERARY_ID","varchar(20)","MUL",""
+        "ITINERARY_NUM","smallint(6)","",""
+        "ITINERARY_DAY","smallint(6)","",""
+        "ITINERARY_NAME","varchar(300)","",""
+        "ITINERARY_DESC","varchar(3000)","",""
+        "ITINERARY_TITLE","varchar(300)","",""
+        "ITINERARY_HOTEL_DATE","char(8)","",""
+        "ITINERARY_HOTEL_ID","char(8)","",""
+        
+        
+.. csv-table:: RAW_PROD_ITINERARY_MAIN
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","char(8)","",""
+        "ITINERARY_ID","varchar(20)","MUL",""
+        "ITINERARY_STS","char(1)","",""
+        "ITINERARY_TYPE","varchar(20)","",""
+        "ITINERARY_OUTB_ID","varchar(20)","",""
+        "LINE_ID","varchar(20)","",""
+        "LINED_ID","varchar(20)","",""
+        "AREA_ID","varchar(20)","",""
+        "AREAD_ID","varchar(20)","",""
+        "ITINERARY_PRODNAME","varchar(150)","",""
+        "ITINERARY_DAYS","smallint(6)","",""
+        "ITINERARY_NORMAL","char(1)","",""
+        "ITINERARY_COUNTRY","varchar(20)","",""
+        "ITINERARY_PROF","varchar(20)","",""
+        "ITINERARY_DT","datetime","",""
+        "ITINERARY_PRICE","decimal(9,2)","",""
+        "ITINERARY_DEPART_DT","char(8)","",""
+        "GROUP_ID","varchar(20)","",""
+        
+        
+.. csv-table:: RAW_SUP_FLIGHT
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(10)","",""
+        "FLIGHT_ID","int(11)","",""
+        "ITINERARY_ID","varchar(20)","MUL",""
+        "FLIGHT_SEQ","int(11)","",""
+        "FLIGHT_FDATE","varchar(10)","",""
+        "FLIGHT_CARRNAME","varchar(20)","",""
+        "FLIGHT_AIR","varchar(6)","",""
+        "FLIGHT_FAIRPORT","varchar(3)","MUL",""
+        "FLIGHT_FNAME","varchar(20)","",""
+        "FLIGHT_FTIME","varchar(5)","",""
+        "FLIGHT_TAIRPORT","varchar(3)","",""
+        "FLIGHT_TNAME","varchar(20)","",""
+        "FLIGHT_TDATE","varchar(8)","",""
+        "FLIGHT_TTIME","varchar(5)","",""
+        "id","int(11)","PRI",""
+        
+        
+.. csv-table:: RAW_SUP_HOTEL
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(8)","","資料日期"
+        "HOTEL_ID","varchar(20)","","旅館代碼"
+        "HOTEL_STS","varchar(2)","","停用"
+        "HOTEL_CNM","varchar(150)","","中文名稱"
+        "HOTEL_ENM","varchar(150)","","英文名稱"
+        "HOTEL_DNM","varchar(150)","","簡稱"
+        "HOTEL_COUNTRY","varchar(20)","","國家代號"
+        "HOTEL_CITY","varchar(20)","","城市代碼"
+        "HOTEL_CITYZONE","varchar(20)","","區域代碼(D-0097)"
+        "SUP_ID","varchar(20)","","供應商代碼"
+        "HOTEL_PROF","varchar(20)","","團產負責單位"
+        "HOTEL_LEVEL","varchar(20)","","星級"
+        "HOTEL_CITY_CNAME","varchar(20)","","城市中文名"
+        "HOTEL_CITY_ENAME","varchar(50)","","城市英文名"
+        "HOTEL_ADDR","varchar(120)","","旅館地址"
+        "HOTEL_PHONE","varchar(20)","","旅館電話"
+        "HOTEL_FAX","varchar(20)","","旅館傳真"
+        "HOTEL_TEL_COUNTRY","varchar(3)","","電話國碼"
+        "HOTEL_TEL_CITY","varchar(5)","","電話城市區碼"
+        "id","int(11)","PRI",""
+        
+        
+.. csv-table:: RAW_SUP_MEAT
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(10)","","資料日期"
+        "MEAT_ID","varchar(20)","","餐廳代碼"
+        "MEAT_STS","varchar(2)","","停業"
+        "MEAT_CNM","varchar(150)","","中文名稱"
+        "MEAT_ENM","varchar(150)","","英文名稱"
+        "MEAT_DNM","varchar(150)","","顯示名稱"
+        "MEAT_COUNTRY","varchar(20)","","國家代號"
+        "MEAT_CITY","varchar(20)","","城市代碼"
+        "MEAT_CITYZONE","varchar(20)","","區域代碼"
+        "MEAT_PROF","varchar(20)","","負責產品單位"
+        "id","int(11)","PRI",""
+        
+        
+.. csv-table:: RAW_SUP_SHOP
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(10)","","資料日期"
+        "SHOP_ID","varchar(20)","","商店代碼"
+        "SHOP_STS","varchar(2)","","狀況"
+        "SHOP_CNM","varchar(150)","","中文名稱"
+        "SHOP_ENM","varchar(150)","","英文名稱"
+        "SHOP_DNM","varchar(150)","","顯示名稱"
+        "SHOP_COUNTRY","varchar(20)","","國家代號"
+        "SHOP_CITY","varchar(20)","","城市代碼"
+        "SHOP_CITYZONE","varchar(20)","","區域代碼"
+        "SHOP_PROF","varchar(20)","","負責產品單位"
+        "id","int(11)","PRI",""
+        
+        
+.. csv-table:: RAW_SUP_VIEW
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "DATA_DATE","varchar(8)","","資料日期"
+        "VIEW_ID","varchar(20)","","景點代碼"
+        "VIEW_STS","varchar(2)","","停用"
+        "VIEW_MAIN","varchar(2)","","主要景點"
+        "VIEW_CNM","varchar(150)","","中文名稱"
+        "VIEW_ENM","varchar(150)","","英文名稱"
+        "VIEW_DNM","varchar(150)","","顯示名稱"
+        "VIEW_COUNTRY","varchar(20)","","國家代號"
+        "VIEW_CITY","varchar(20)","","城市代碼"
+        "VIEW_CITYZONE","varchar(20)","","區域代碼"
+        "VIEW_PROF","varchar(20)","","負責產品單位"
+        "id","int(11)","PRI",""
+        
+        
+.. csv-table:: SPEC_TOURISTAREA
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "TOURISTAREA_ID","int(11)","","流水號"
+        "TOURISTAREA_CULTURE_ID","varchar(7)","","旅遊區洲別代碼"
+        "TOURISTAREA_COUNTRY_ID","varchar(7)","","旅遊區國家代碼"
+        "TOURISTAREA_VALUE","varchar(7)","","旅遊區編號"
+        "TOURISTAREA_NM","varchar(30)","","旅遊區名稱"
+        "TOURISTAREA_PROD_AREA","char(2)","","地區代號"
+        "TOURISTAREA_PROD_LINE","char(2)","","線別"
+        "TOURISTAREA_PROD_DLINE","char(1)","","副線別"
+        "TOURISTAREA_PROF","char(2)","","單位線別"
+        "UPD_USER_ID","varchar(20)","","更新使用者帳號"
+        "UPD_DT","datetime","","更新時間"
+        "IS_TOURISTAREA","bit(1)","","狀態"
+        "TOURISTAREA_PROF_VALUE","char(2)","","單位區域別"
+        
+        
+.. csv-table:: TA_Attraction
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "url","mediumtext","",""
+        "chinese_title","text","",""
+        "english_title","text","",""
+        "tag","text","",""
+        "address","text","",""
+        "phone","text","",""
+        "lat","text","",""
+        "lng","text","",""
+        "places","text","",""
+        
+        
+.. csv-table:: TA_Chinese
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","",""
+        "url","mediumtext","",""
+        "chinese_title","text","MUL",""
+        "english_title","text","",""
+        "tag","text","",""
+        "address","text","",""
+        "phone","text","",""
+        "lat","text","",""
+        "lng","text","",""
+        "places","text","",""
+        
+        
+.. csv-table:: TA_POI
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "url","varchar(200)","",""
+        "chinese_title","varchar(200)","",""
+        "english_title","varchar(200)","",""
+        "tag","varchar(200)","",""
+        "address","mediumtext","",""
+        "phone","varchar(45)","",""
+        "lat","float","",""
+        "lng","float","",""
+        "places","mediumtext","",""
+        
+        
+.. csv-table:: TD_FOI_MAIN
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "POI_ID","int(11)","",""
+        "POI_CATEGORY","smallint(6)","",""
+        "FOI_ID","int(11)","",""
+        "STATUS","bit(1)","",""
+        "FOI_NAME","varchar(50)","",""
+        "SERVICE_TIME_START","char(4)","",""
+        "SERVICE_TIME_END","char(4)","",""
+        "EXPERIENCE_TIME","decimal(4,1)","",""
+        "FOI_COST","float","",""
+        "CURRENCY_ID","int(11)","",""
+        "FOI_DESCRIPTION","mediumtext","",""
+        "COST_EXPLAIN","varchar(200)","",""
+        "SERVICE_LANG","varchar(50)","",""
+        "NOTES","varchar(200)","",""
+        "SPECIAL_NOTES","varchar(200)","",""
+        "START_LONGITUDE","decimal(9,6)","",""
+        "START_LATITUDE","decimal(9,6)","",""
+        "END_LONGITUDE","decimal(9,6)","",""
+        "END_LATITUDE","decimal(9,6)","",""
+        "START_CITY_ID","varchar(20)","",""
+        "END_CITY_ID","varchar(20)","",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: TD_PACKAGE_MAIN
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "PACKAGE_ID","int(11)","PRI",""
+        "COVER_PHOTO_ID","varchar(20)","",""
+        "STATUS","bit(1)","",""
+        "PACKAGE_NAME","varchar(20)","",""
+        "PACKAGE_NAME_EN","varchar(20)","",""
+        "PACKAGE_DESCRIPTION","text","",""
+        "PACKAGE_TYPE","smallint(6)","",""
+        "PACKAGE_COST","decimal(20,1)","",""
+        "TAKE_TIME","int(11)","",""
+        "NOTE","varchar(200)","",""
+        "SERVICE_LANG","varchar(20)","",""
+        "TRAFFIC_TYPE","varchar(200)","",""
+        "CURRENCY_ID","int(11)","",""
+        "OWN_EXPENSE","bit(1)","",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: TD_PACKAGE_POI
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "PACKAGE_ID","int(11)","PRI",""
+        "POI_ID","int(11)","PRI",""
+        "FOI_ID","int(11)","PRI",""
+        "CITY_ID","varchar(20)","",""
+        "STATUS","bit(1)","",""
+        "SORT_ORDER","char(6)","",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: TD_PDM_POI_MAIN
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "POI_ID","int(11)","PRI",""
+        "PHOTO_ID","varchar(100)","",""
+        "STATUS","bit(1)","",""
+        "POI_NAME","varchar(200)","",""
+        "POI_NAME_EN","varchar(200)","",""
+        "POI_LOCAL_NAME","varchar(200)","",""
+        "AREA_ID","int(11)","",""
+        "CITY_ID","varchar(20)","",""
+        "ORIGINAL_POI_NO","varchar(20)","",""
+        "ORIGINAL_TYPE","smallint(6)","",""
+        "POI_DESCRIPTION","text","",""
+        "TICKET_INFO","varchar(200)","",""
+        "OPENTIME_MON","varchar(11)","",""
+        "OPENTIME_TUES","varchar(11)","",""
+        "OPENTIME_WED","varchar(11)","",""
+        "OPENTIME_THUR","varchar(11)","",""
+        "OPENTIME_FRI","varchar(11)","",""
+        "OPENTIME_SAT","varchar(11)","",""
+        "OPENTIME_SUN","varchar(11)","",""
+        "OPENTIME_NOTE","varchar(1000)","",""
+        "POI_ADDRESS","varchar(200)","",""
+        "POI_LONGITUDE","double","",""
+        "POI_LATITUDE","double","",""
+        "POI_PHONENUMBER","varchar(50)","",""
+        "POI_WEBSITE","varchar(255)","",""
+        "POI_SERVICE_LANG","varchar(50)","",""
+        "IS_HIGH_RISK","bit(1)","",""
+        "TRAFFIC_TYPE","varchar(200)","",""
+        "NOTE","varchar(200)","",""
+        "HOTEL_LEVEL","smallint(6)","",""
+        "DEVICES","varchar(50)","",""
+        "IS_AFFILIATED","bit(1)","",""
+        "IS_TRAFFIC_FINISH","bit(1)","",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: TD_PDM_POI_MAIN2
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "POI_ID","int(11)","PRI",""
+        "PHOTO_ID","varchar(100)","",""
+        "STATUS","bit(1)","",""
+        "POI_NAME","varchar(200)","",""
+        "POI_NAME_EN","varchar(200)","",""
+        "POI_LOCAL_NAME","varchar(200)","",""
+        "AREA_ID","int(11)","",""
+        "CITY_ID","varchar(20)","",""
+        "ORIGINAL_POI_NO","varchar(20)","",""
+        "ORIGINAL_TYPE","smallint(6)","",""
+        "POI_DESCRIPTION","text","",""
+        "TICKET_INFO","varchar(200)","",""
+        "OPENTIME_MON","varchar(11)","",""
+        "OPENTIME_TUES","varchar(11)","",""
+        "OPENTIME_WED","varchar(11)","",""
+        "OPENTIME_THUR","varchar(11)","",""
+        "OPENTIME_FRI","varchar(11)","",""
+        "OPENTIME_SAT","varchar(11)","",""
+        "OPENTIME_SUN","varchar(11)","",""
+        "OPENTIME_NOTE","varchar(1000)","",""
+        "POI_ADDRESS","varchar(200)","",""
+        "POI_LONGITUDE","float","",""
+        "POI_LATITUDE","float","",""
+        "POI_PHONENUMBER","varchar(50)","",""
+        "POI_WEBSITE","varchar(255)","",""
+        "POI_SERVICE_LANG","varchar(50)","",""
+        "IS_HIGH_RISK","bit(1)","",""
+        "TRAFFIC_TYPE","varchar(200)","",""
+        "NOTE","varchar(200)","",""
+        "HOTEL_LEVEL","smallint(6)","",""
+        "DEVICES","varchar(50)","",""
+        "IS_AFFILIATED","bit(1)","",""
+        "IS_TRAFFIC_FINISH","bit(1)","",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: TD_POI_CATEGORY
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "POI_ID","int(11)","PRI",""
+        "POI_CATEGORY","smallint(6)","PRI",""
+        "UPD_USER_ID","varchar(20)","",""
+        "UPD_DT","datetime","",""
+        
+        
+.. csv-table:: catedict
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "cateid","int(11)","MUL",""
+        "catename","varchar(100)","","類別名稱"
+        
+        
+.. csv-table:: clickstream
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "userid","varchar(45)","","使用者代碼"
+        "poiid","varchar(45)","","POI ID"
+        "tripid","varchar(45)","","Itinerary ID"
+        "actionid","int(11)","","使用者行為代碼"
+        
+        
+.. csv-table:: count_area_days
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AREA_DID","varchar(45)","",""
+        "AREA_NAME","varchar(45)","",""
+        "days","int(11)","",""
+        
+        
+.. csv-table:: count_area_partner
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AREA_DID","varchar(45)","",""
+        "AREA_NAME","varchar(45)","",""
+        "partner","varchar(60)","",""
+        "cnt","int(11)","",""
+        
+        
+.. csv-table:: count_area_poi
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AREA_DID","varchar(45)","",""
+        "AREA_NAME","varchar(45)","",""
+        "topic","varchar(60)","",""
+        "cnt","int(11)","",""
+        
+        
+.. csv-table:: count_area_topics
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AREA_DID","varchar(45)","",""
+        "AREA_NAME","varchar(45)","",""
+        "topic","varchar(60)","",""
+        "cnt","int(11)","",""
+        
+        
+.. csv-table:: district
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "did","int(11)","MUL",""
+        "dnum","varchar(45)","","識別碼"
+        "level","int(11)","",""
+        "langid","int(11)","",""
+        "langname","varchar(45)","",""
+        "langcode","varchar(45)","",""
+        "dname","varchar(100)","",""
+        "dabbr","varchar(100)","",""
+        
+        
+.. csv-table:: funtrip
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "stdname","varchar(200)","",""
+        "brief","text","",""
+        "latitude","float","",""
+        "longitude","float","",""
+        
+        
+.. csv-table:: gov_poi
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "poiid","varchar(45)","UNI",""
+        "poiname","varchar(45)","",""
+        "latitude","float","",""
+        "longitude","float","",""
+        "olddesc","mediumtext","",""
+        "description","mediumtext","",""
+        "cl1","varchar(45)","",""
+        "cl2","varchar(45)","",""
+        "cl3","varchar(45)","",""
+        
+.. csv-table:: holidays
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "hdesc","varchar(45)","",""
+        "begindate","date","",""
+        "enddate","date","",""
+        
+.. csv-table:: img_match
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "sn","int(11)","PRI",""
+        "ITINERARY_ID","varchar(20)","UNI",""
+        "IMG_SRC","text","MUL",""
+        
+.. csv-table:: label_action
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "actionid","int(11)","PRI",""
+        "pagename","varchar(45)","",""
+        "category","varchar(45)","",""
+        "button","varchar(45)","",""
+        
+.. csv-table:: map_area_details
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "AREAD_ID","varchar(45)","",""
+        "AID","varchar(45)","MUL",""
+        "areaname","varchar(60)","",""
+        
+.. csv-table:: map_area_id
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "areaid","varchar(45)","",""
+        "areaname","varchar(60)","",""
+        
+        
+.. csv-table:: map_area_ta
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AID","varchar(45)","",""
+        "L1","varchar(45)","MUL",""
+        "L2","varchar(45)","",""
+        "L3","varchar(45)","",""
+        
+        
+.. csv-table:: map_area_table
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "AREAD_ID","varchar(45)","",""
+        "AID","varchar(45)","",""
+        "areaname","varchar(60)","",""
+        
+.. csv-table:: map_areaid
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "AREAD_ID","varchar(45)","MUL",""
+        "AID","varchar(45)","MUL",""
+        
+.. csv-table:: map_iid_ta
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "iid","varchar(45)","MUL",""
+        "taid","int(11)","MUL",""
+        
+        
+.. csv-table:: map_iid_ta_v2
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "iid","varchar(45)","MUL",""
+        "taid","int(11)","",""
+        
+        
+.. csv-table:: map_iid_ta_v3
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "iid","varchar(45)","MUL",""
+        "taid","int(11)","",""
+        
+        
+.. csv-table:: map_itinerary_holidays
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(20)","MUL",""
+        "year","int(11)","MUL",""
+        "holidays","varchar(45)","MUL",""
+        
+        
+.. csv-table:: map_itinerary_hotel
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(20)","MUL",""
+        "hotel_id","int(11)","",""
+        
+        
+.. csv-table:: map_itinerary_meat
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(20)","MUL",""
+        "meat_id","varchar(20)","",""
+        
+        
+.. csv-table:: map_itinerary_partner
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(45)","MUL",""
+        "partner","int(11)","MUL",""
+        "plabel","varchar(45)","",""
+        
+        
+.. csv-table:: map_itinerary_poi
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(20)","MUL",""
+        "poi_id","int(11)","",""
+        
+        
+.. csv-table:: map_itinerary_tags
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "itinerary_id","varchar(20)","MUL",""
+        "tag","varchar(40)","",""
+        
+        
+.. csv-table:: map_ta_aid
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "taid","int(11)","MUL",""
+        "aid","varchar(45)","",""
+        
+        
+.. csv-table:: map_ta_tags
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "taid","int(11)","MUL",""
+        "tag","varchar(45)","",""
+        
+        
+.. csv-table:: map_tour_subject
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "tourid","varchar(45)","MUL",""
+        "subject","varchar(100)","",""
+        
+        
+.. csv-table:: orderdata
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "gender","varchar(3)","",""
+        "age","int(11)","",""
+        "groupid","varchar(45)","",""
+        "orderid","varchar(45)","",""
+        "company","varchar(45)","",""
+        "year","int(11)","",""
+        "odate","datetime","",""
+        
+        
+.. csv-table:: partner_label
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "partner","int(11)","",""
+        "label","varchar(45)","",""
+        
+        
+.. csv-table:: pdm_poi
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "pdmid","int(11)","",""
+        "category","varchar(45)","",""
+        "status","int(11)","",""
+        "POI_NAME","varchar(200)","MUL",""
+        "POI_NAME_EN","varchar(200)","",""
+        "POI_LOCAL_NAME","varchar(200)","",""
+        "POI_DESCRIPTION","text","",""
+        "POI_ADDRESS","varchar(200)","",""
+        "POI_LONGITUDE","float","",""
+        "POI_LATITUDE","float","",""
+        "CONTINENT_NM","varchar(45)","",""
+        "COUNTRY_NM","varchar(45)","",""
+        "CITY_NM","varchar(45)","",""
+        
+        
+.. csv-table:: poimapping
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "poiid","int(11)","MUL",""
+        "cateid","int(11)","MUL",""
+        
+        
+.. csv-table:: spec_hotel
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "ITINERARY_ID","varchar(45)","MUL",""
+        "HOTEL","varchar(200)","",""
+        
+        
+.. csv-table:: spec_restaurant
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "ITINERARY_ID","varchar(45)","MUL",""
+        "restaurant","varchar(200)","",""
+        
+        
+.. csv-table:: taglist
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "category","varchar(60)","MUL",""
+        "tag","varchar(60)","",""
+        
+        
+.. csv-table:: tagresult
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "iid","varchar(45)","",""
+        "taid","int(11)","",""
+        "tag","varchar(45)","",""
+        "AID","varchar(45)","",""
+        
+        
+.. csv-table:: tags
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "tag","varchar(60)","UNI",""
+        
+        
+.. csv-table:: tmp_iit_raw
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "ITINERARY_ID","varchar(45)","MUL",""
+        "raw","varchar(45)","MUL",""
+        
+        
+.. csv-table:: tmp_raw
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "ITINERARY_ID","varchar(20)","MUL",""
+        "ITINERARY_NAME","varchar(300)","",""
+        "AID","varchar(45)","",""
+        
+        
+.. csv-table:: topics_map
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "topics","varchar(100)","MUL",""
+        "weight","float","",""
+        "areadid","varchar(45)","",""
+        
+        
+.. csv-table:: tour
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "tourid","varchar(45)","MUL",""
+        "company","varchar(45)","",""
+        "duration","int(11)","",""
+        "features","text","",""
+        "pois","text","",""
+        "description","text","",""
+        "hotel","text","",""
+        "days","int(11)","",""
+        
+        
+.. csv-table:: tour_img
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "ITINERARY_ID","varchar(45)","MUL",""
+        "URL","varchar(200)","",""
+        
+        
+.. csv-table:: tourmapping
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "id","int(11)","PRI",""
+        "tourid","varchar(45)","MUL",""
+        "poiid","int(11)","MUL",""
+        "areadid","varchar(45)","MUL",""
+        
+        
+.. csv-table:: user_theme
+     :header: "欄位名稱", "資料型態", "KEY", "欄位說明"
+     :widths: 15, 10, 5,20
+
+        "user_id","varchar(30)","PRI",""
+        "label_id","int(11)","",""
+        "source","varchar(20)","",""
+
+
+	
+
+
+
+
+
+
+
+
+
+

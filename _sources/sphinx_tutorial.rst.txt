@@ -1,0 +1,217 @@
+
+.. lion documentation master file, created by
+   sphinx-quickstart on Thu Nov 23 10:21:06 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+sphinx tutorial documentation
+##########################################
+
+   
+Indices and tables
+==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
+* `安裝與環境設定`_
+	* `安裝`_
+	* `修改config.py`_
+	* `修改主題`_
+* `Learn reStructuredText`_
+	* `toctree`_
+	* `圖片`_
+	* `內部連結、外部連結`_
+	* `code block`_
+	* `註解`_
+* `輸出檔案`_
+* `疑難排解`_
+
+
+
+.. _sphinx_install:
+
+安裝與環境設定  
+-----------------------------
+
+安裝
+^^^^^^^^^^^^^
+
+:安裝步驟:
+	 - install
+	 	``$ pip install Sphinx``
+	 - 建立專案
+	 	- 建立或選擇一個folder,在資料夾底下執行quickstart
+	 	- ``$ sphinx-quickstart``
+	 - 初始設定
+		- 執行quickstart後會有一些設置,大部分都可以按enter默認預設的設置\
+		- root path: 如果沒有填就會將當前的目錄做為跟目錄
+		- 每一個設置的說明可 `參考這裡`_
+		- 之後在conf.py也可以修改設置
+	
+		
+.. _參考這裡 : https://goo.gl/eHhL3v
+
+
+修改config.py
+^^^^^^^^^^^^^^^^^^
+
+.. _showsource: 
+
+新增 "show source"在side bar
+"""""""""""""""""""""""""""""""""""""
+
+* 修改conf.py
+
+.. code-block:: python
+   :emphasize-lines: 5,6,7
+
+	html_sidebars = {
+	    '**': [
+	        'relations.html',  
+	        'searchbox.html',
+	        'localtoc.html',
+	        'sourcelink.html']}
+	## If true, links to the reST sources are added to the pages.
+	html_show_sourcelink = True
+
+
+修改主題
+""""""""""""""""""""""""""""
+
+樣式可參考 `這裡`_ 
+
+.. _這裡: http://www.sphinx-doc.org/en/stable/theming.html#using-a-theme
+
+::
+
+	#conf.py
+	html_theme = "樣式名稱"
+	
+
+
+        
+
+Learn reStructuredText
+-----------------------------
+
+設定sphinx之後，在source底下會看到index.rst檔，就可以開始撰寫rst文件了
+
+* `官方文件`_ 
+* 不錯的tutorial
+	* https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#multicells-tables-first-method   
+	* http://kevinchen.synology.me/TechnicalDocuments/Sphinx/rest_easyteach.html
+* See "show source"
+	
+
+.. _官方文件: http://www.sphinx-doc.org/en/stable/contents.html
+
+toctree
+^^^^^^^^^^^^
+
+.. image:: toctree圖示.png
+
+Toctree只能include別的rst檔
+同一個頁面要reference到標題,需要使用reference label
+
+
+圖片
+^^^^^^^^^^^^
+
+把檔案放在source底下(和當前的rst同一個資料夾),編譯的時候會備自動copy到build資料夾::
+
+	.. image:: filename.jpg
+
+內部連結、外部連結
+^^^^^^^^^^^^^^^^^^^
+
+1. 外部連結
+
+.. image:: hyperlink.png
+
+2. 內部連結方法ㄧ : 直接使用標題名稱
+	
+::
+
+	`輸出檔案`_
+	
+3. 內部連結方法二 : 使用自定義Label
+	
+::
+	
+	.. _innerLink:   # 在需要被連結到的地方自定義label
+	:ref:`innerLink` # 在需要連結到label的地方置放連結ref
+	
+4. 如果要在文件最上方自動建立索引:
+
+::
+
+	.. contents:: a title for the contents
+	    :depth: 2
+
+
+
+
+code block
+^^^^^^^^^^^^^^^^^^^
+
+可highlight,可指定語言,使用linenumber...等等
+
+- 使用雙冒號"::"開頭
+
+- 如果要指定語言,用.. code-block:: python
+
+.. code-block:: python
+	:linenos:
+	:emphasize-lines: 2
+	
+	# here is the code
+	# this is the emphasize-line
+	print('hello world')
+
+使用\``符號:
+\``$here is the code\``
+
+	``$here is the code``
+
+註解
+^^^^^^^^^^^^
+
+\.. this is a comments
+
+
+
+
+.. _convert2pdf:
+
+輸出檔案
+-----------------------------
+
+- 輸出html檔案
+	``$make html``
+	
+- 輸出pdf檔案
+	用 `wkhtmltopdf`_ 工具,將html轉成pdf
+	
+	
+.. _wkhtmltopdf: https://wkhtmltopdf.org/
+
+
+疑難排解		
+---------------
+
+* 檔案link失敗
+	* 解決: 把檔案copy到local再打開
+	
+* 編譯時出現warning
+	* 解決: 九成是排版問題
+	* 例如 \*abc -> \* abc
+	* code block:: 下面沒有空一行
+	
+::
+
+	#warning
+	/home/peihsuan/sphinx_20171123/source/sphinx_tutorial.rst:105: 
+	WARNING: Inline emphasis start-string without end-string.
+	

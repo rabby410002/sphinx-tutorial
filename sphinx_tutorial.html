@@ -1,0 +1,357 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>sphinx tutorial documentation &#8212; lion 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lion’s documentation" href="index_lion.html" />
+    <link rel="prev" title="Welcome to peihsuan’s sphinx documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index_lion.html" title="lion’s documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to peihsuan’s sphinx documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lion 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx-tutorial-documentation">
+<h1>sphinx tutorial documentation<a class="headerlink" href="#sphinx-tutorial-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#id1">安裝與環境設定</a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#id2">安裝</a></li>
+<li><a class="reference internal" href="#config-py">修改config.py</a></li>
+<li><a class="reference internal" href="#id4">修改主題</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#learn-restructuredtext">Learn reStructuredText</a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#toctree">toctree</a></li>
+<li><a class="reference internal" href="#id7">圖片</a></li>
+<li><a class="reference internal" href="#id8">內部連結、外部連結</a></li>
+<li><a class="reference internal" href="#code-block">code block</a></li>
+<li><a class="reference internal" href="#id9">註解</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><a class="reference internal" href="#id10">輸出檔案</a></li>
+<li><a class="reference internal" href="#id11">疑難排解</a></li>
+</ul>
+<div class="section" id="sphinx-install">
+<span id="id1"></span><h3>安裝與環境設定<a class="headerlink" href="#sphinx-install" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>安裝<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">安裝步驟:</th><td class="field-body"><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>install</dt>
+<dd><code class="docutils literal"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Sphinx</span></code></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>建立專案</dt>
+<dd><ul class="first last">
+<li>建立或選擇一個folder,在資料夾底下執行quickstart</li>
+<li><code class="docutils literal"><span class="pre">$</span> <span class="pre">sphinx-quickstart</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>初始設定</dt>
+<dd><ul class="first last">
+<li>執行quickstart後會有一些設置,大部分都可以按enter默認預設的設置</li>
+<li>root path: 如果沒有填就會將當前的目錄做為跟目錄</li>
+<li>每一個設置的說明可 <a class="reference external" href="https://goo.gl/eHhL3v">參考這裡</a></li>
+<li>之後在conf.py也可以修改設置</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="config-py">
+<h4>修改config.py<a class="headerlink" href="#config-py" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="show-source-side-bar">
+<span id="showsource"></span><h5>新增 “show source”在side bar<a class="headerlink" href="#show-source-side-bar" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li>修改conf.py</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span>     <span class="n">html_sidebars</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;**&#39;</span><span class="p">:</span> <span class="p">[</span>
+             <span class="s1">&#39;relations.html&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;searchbox.html&#39;</span><span class="p">,</span>
+<span class="hll">             <span class="s1">&#39;localtoc.html&#39;</span><span class="p">,</span>
+</span><span class="hll">             <span class="s1">&#39;sourcelink.html&#39;</span><span class="p">]}</span>
+</span><span class="hll">     <span class="c1">## If true, links to the reST sources are added to the pages.</span>
+</span>     <span class="n">html_show_sourcelink</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h5>修改主題<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h5>
+<p>樣式可參考 <a class="reference external" href="http://www.sphinx-doc.org/en/stable/theming.html#using-a-theme">這裡</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#conf.py</span>
+<span class="n">html_theme</span> <span class="o">=</span> <span class="s2">&quot;樣式名稱&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="learn-restructuredtext">
+<h3>Learn reStructuredText<a class="headerlink" href="#learn-restructuredtext" title="Permalink to this headline">¶</a></h3>
+<p>設定sphinx之後，在source底下會看到index.rst檔，就可以開始撰寫rst文件了</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.sphinx-doc.org/en/stable/contents.html">官方文件</a></li>
+<li><dl class="first docutils">
+<dt>不錯的tutorial</dt>
+<dd><ul class="first last">
+<li><a class="reference external" href="https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#multicells-tables-first-method">https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#multicells-tables-first-method</a></li>
+<li><a class="reference external" href="http://kevinchen.synology.me/TechnicalDocuments/Sphinx/rest_easyteach.html">http://kevinchen.synology.me/TechnicalDocuments/Sphinx/rest_easyteach.html</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>See “show source”</li>
+</ul>
+<div class="section" id="toctree">
+<h4>toctree<a class="headerlink" href="#toctree" title="Permalink to this headline">¶</a></h4>
+<img alt="_images/toctree圖示.png" src="_images/toctree圖示.png" />
+<p>Toctree只能include別的rst檔
+同一個頁面要reference到標題,需要使用reference label</p>
+</div>
+<div class="section" id="id7">
+<h4>圖片<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>把檔案放在source底下(和當前的rst同一個資料夾),編譯的時候會備自動copy到build資料夾:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">image</span><span class="p">::</span> <span class="n">filename</span><span class="o">.</span><span class="n">jpg</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4>內部連結、外部連結<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>外部連結</li>
+</ol>
+<img alt="_images/hyperlink.png" src="_images/hyperlink.png" />
+<ol class="arabic simple" start="2">
+<li>內部連結方法ㄧ : 直接使用標題名稱</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span>`輸出檔案`_
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>內部連結方法二 : 使用自定義Label</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span>.. _innerLink:   # 在需要被連結到的地方自定義label
+:ref:`innerLink` # 在需要連結到label的地方置放連結ref
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>如果要在文件最上方自動建立索引:</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">contents</span><span class="p">::</span> <span class="n">a</span> <span class="n">title</span> <span class="k">for</span> <span class="n">the</span> <span class="n">contents</span>
+    <span class="p">:</span><span class="n">depth</span><span class="p">:</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="code-block">
+<h4>code block<a class="headerlink" href="#code-block" title="Permalink to this headline">¶</a></h4>
+<p>可highlight,可指定語言,使用linenumber…等等</p>
+<ul class="simple">
+<li>使用雙冒號”::”開頭</li>
+<li>如果要指定語言,用.. code-block:: python</li>
+</ul>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># here is the code</span>
+<span class="hll"><span class="c1"># this is the emphasize-line</span>
+</span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>使用``符號:
+``$here is the code``</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">$here</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">code</span></code></div></blockquote>
+</div>
+<div class="section" id="id9">
+<h4>註解<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>.. this is a comments</p>
+</div>
+</div>
+<div class="section" id="convert2pdf">
+<span id="id10"></span><h3>輸出檔案<a class="headerlink" href="#convert2pdf" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>輸出html檔案</dt>
+<dd><code class="docutils literal"><span class="pre">$make</span> <span class="pre">html</span></code></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>輸出pdf檔案</dt>
+<dd>用 <a class="reference external" href="https://wkhtmltopdf.org/">wkhtmltopdf</a> 工具,將html轉成pdf</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>疑難排解<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>檔案link失敗</dt>
+<dd><ul class="first last">
+<li>解決: 把檔案copy到local再打開</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>編譯時出現warning</dt>
+<dd><ul class="first last">
+<li>解決: 九成是排版問題</li>
+<li>例如 *abc -&gt; * abc</li>
+<li>code block:: 下面沒有空一行</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#warning</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">peihsuan</span><span class="o">/</span><span class="n">sphinx_20171123</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">sphinx_tutorial</span><span class="o">.</span><span class="n">rst</span><span class="p">:</span><span class="mi">105</span><span class="p">:</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">Inline</span> <span class="n">emphasis</span> <span class="n">start</span><span class="o">-</span><span class="n">string</span> <span class="n">without</span> <span class="n">end</span><span class="o">-</span><span class="n">string</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to peihsuan’s sphinx documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="index_lion.html"
+                        title="next chapter">lion’s documentation</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sphinx_tutorial.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sphinx tutorial documentation</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a><ul>
+<li><a class="reference internal" href="#sphinx-install">安裝與環境設定</a><ul>
+<li><a class="reference internal" href="#id2">安裝</a></li>
+<li><a class="reference internal" href="#config-py">修改config.py</a><ul>
+<li><a class="reference internal" href="#show-source-side-bar">新增 “show source”在side bar</a></li>
+<li><a class="reference internal" href="#id4">修改主題</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#learn-restructuredtext">Learn reStructuredText</a><ul>
+<li><a class="reference internal" href="#toctree">toctree</a></li>
+<li><a class="reference internal" href="#id7">圖片</a></li>
+<li><a class="reference internal" href="#id8">內部連結、外部連結</a></li>
+<li><a class="reference internal" href="#code-block">code block</a></li>
+<li><a class="reference internal" href="#id9">註解</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convert2pdf">輸出檔案</a></li>
+<li><a class="reference internal" href="#id11">疑難排解</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index_lion.html" title="lion’s documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to peihsuan’s sphinx documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lion 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, peihsuan.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
